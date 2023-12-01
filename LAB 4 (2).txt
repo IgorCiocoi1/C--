@@ -1,0 +1,83 @@
+#include <iostream>
+#include <string>
+
+
+class Camera {
+protected:
+    float suprafata;
+
+public:
+    // Constructor
+    Camera(float suprafata) : suprafata(suprafata) {}
+
+    // Metoda de acces pentru suprafata
+    float getSuprafata() const {
+        return suprafata;
+    }
+};
+
+class Apartament : public Camera {
+private:
+    float suprafataBucatarie;
+    int etaj;
+
+public:
+    // Constructor
+    Apartament(float suprafataOdaie, float suprafataBucatarie, int etaj)
+        : Camera(suprafataOdaie), suprafataBucatarie(suprafataBucatarie), etaj(etaj) {}
+
+    // Metoda de acces pentru suprafata bucatarie
+    float getSuprafataBucatarie() const {
+        return suprafataBucatarie;
+    }
+
+    // Metoda de acces pentru etaj
+    int getEtaj() const {
+        return etaj;
+    }
+};
+
+class ApartamentCuAdresa : public Apartament {
+private:
+    std::string nume;
+    std::string adresa;
+
+public:
+    // Constructor
+    ApartamentCuAdresa(float suprafataOdaie, float suprafataBucatarie, int etaj, const std::string &adresa)
+        : Apartament(suprafataOdaie, suprafataBucatarie, etaj), adresa(adresa) {}
+
+    // Metoda de acces pentru adresa
+    const std::string &getAdresa() const {
+        return adresa;
+    }
+
+    // Metoda de acces pentru nume
+    const std::string &getNume() const {
+        return nume;
+    }
+
+    // Metoda de schimbare a numelui
+    void schimbaNume(const std::string &nouNume) {
+        nume = nouNume;
+    }
+
+    // Suprascrierea operatorului de flux de ieșire pentru afișarea informațiilor despre apartament
+    friend std::ostream &operator<<(std::ostream &os, const ApartamentCuAdresa &apartament) {
+        os << "Nume: " << apartament.getNume() << ", "
+           << "Suprafata odaie: " << apartament.getSuprafata() << " m^2, "
+           << "Suprafata bucatarie: " << apartament.getSuprafataBucatarie() << " m^2, "
+           << "Etaj: " << apartament.getEtaj() << ", "
+           << "Adresa: " << apartament.getAdresa();
+        return os;
+    }
+};
+
+int main() {
+    // Exemplu de utilizare
+    ApartamentCuAdresa apartament(17.0, 30.0, 5, "Strada Ion Creanga, Nr. 5");
+    apartament.schimbaNume("Murafa Dan");
+    std::cout << apartament << std::endl;
+
+    return 0;
+}
