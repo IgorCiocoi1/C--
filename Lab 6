@@ -1,0 +1,87 @@
+#include <iostream>
+#include <cmath>
+
+// Clasa abstractă de bază
+class Figure {
+public:
+    virtual double area() const = 0; // Funcție virtuală pură
+    virtual ~Figure() {} // Declarație a unui destrucător virtual
+};
+
+// Clasa derivată Square
+class Square : public Figure {
+private:
+    double side;
+
+public:
+    Square(double s) : side(s) {}
+
+    double area() const override {
+        return side * side;
+    }
+};
+
+// Clasa derivată Circle
+class Circle : public Figure {
+private:
+    double radius;
+
+public:
+    Circle(double r) : radius(r) {}
+
+    double area() const override {
+        return 3.14159 * radius * radius;
+    }
+};
+
+// Clasa derivată Triangle
+class Triangle : public Figure {
+private:
+    double base;
+    double height;
+
+public:
+    Triangle(double b, double h) : base(b), height(h) {}
+
+    double area() const override {
+        return 0.5 * base * height;
+    }
+};
+
+// Clasa derivată Trapeze
+class Trapeze : public Figure {
+private:
+    double sideA;
+    double sideB;
+    double height;
+
+public:
+    Trapeze(double a, double b, double h) : sideA(a), sideB(b), height(h) {}
+
+    double area() const override {
+        return 0.5 * (sideA + sideB) * height;
+    }
+};
+
+int main() {
+    const int arraySize = 4;
+    Figure* figures[arraySize];
+
+    // Alocare și atribuire de adrese pentru obiectele claselor derivate
+    figures[0] = new Square(5.0);
+    figures[1] = new Circle(3.0);
+    figures[2] = new Triangle(4.0, 6.0);
+    figures[3] = new Trapeze(2.0, 4.0, 3.0);
+
+    // Calcul și afișare arie pentru fiecare obiect
+    for (int i = 0; i < arraySize; ++i) {
+        std::cout << "Aria figurii " << i+1 << ": " << figures[i]->area() << std::endl;
+    }
+
+    // Dezalocare memorie pentru obiectele alocate dinamic
+    for (int i = 0; i < arraySize; ++i) {
+        delete figures[i];
+    }
+
+    return 0;
+}
