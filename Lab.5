@@ -1,0 +1,35 @@
+#include <iostream>
+
+using namespace std;
+
+class Mamifer {
+public:
+    std::string specie;
+};
+
+class Reptila {
+public:
+    std::string species;
+};
+
+class Ornitorinc : public Mamifer, public Reptila {
+};
+
+void InputSpecie(Mamifer& m, std::string specie) {
+    m.specie = specie;
+}
+
+void InputSpecies(Reptila& r, std::string species) {
+    r.species = species;
+}
+
+int main() {
+    Ornitorinc o;
+    InputSpecie(o, "Elefant");
+    InputSpecies(o, "Sarpe");
+
+    std::cout << "Specia mamifer: " << o.specie << std::endl;
+    std::cout << "Specia reptila: " << o.species << std::endl;
+
+    return 0;
+}
