@@ -1,0 +1,50 @@
+#include <iostream>
+
+class Animal {
+public:
+    virtual void afisare() const {
+        std::cout << "Leu\n";
+    }
+};
+
+class Mamifer : public virtual Animal {
+public:
+    void afisare() const override {
+        std::cout << "Elefant\n";
+    }
+};
+
+class Reptila : public virtual Animal {
+public:
+    void afisare() const override {
+        std::cout << "Sarpe\n";
+    }
+};
+
+class Ornitorinc : public Mamifer, public Reptila {
+public:
+    void afisare() const override {
+        std::cout << "Ornitorinc\n";
+    }
+};
+
+int main() {
+    Animal animal;
+    Mamifer mamifer;
+    Reptila reptila;
+    Ornitorinc ornitorinc;
+
+    std::cout << "Afisare Animal: ";
+    animal.afisare();
+
+    std::cout << "\nAfisare Mamifer: ";
+    mamifer.afisare();
+
+    std::cout << "\nAfisare Reptila: ";
+    reptila.afisare();
+
+    std::cout << "\nAfisare Ornitorinc: ";
+    ornitorinc.afisare();
+
+    return 0;
+}
