@@ -1,0 +1,25 @@
+#include <iostream>
+#include <vector>
+
+// Definirea unui șablon de funcție
+template <typename T>
+void swapPairs(std::vector<T>& vec) {
+    int n = vec.size();
+    // Iterează peste elemente în pași de 2
+    for (int i = 0; i < n - 1; i += 2) {
+        // Schimbă elementele din pereche
+        std::swap(vec[i], vec[i + 1]);
+    }
+}
+
+int main() {
+    // Exemplu cu un vector de int
+    std::vector<int> v1 = {1, 2, 3, 4, 5, 6};
+    swapPairs(v1);
+    for (int num : v1) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
